@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2><strong>User:</strong> {{ user.username }}</h2>
+  <p><strong>Email: </strong>{{ user.email }}</p>
+  <p><strong>Role: </strong>{{ user.role }}</p>
+  <p><strong>Status:</strong> {{ user.status }}</p>
+  <a href="{% url 'enroll_app:user_list' %}">Back</a>
+{% endblock %}

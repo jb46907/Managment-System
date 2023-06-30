@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Carrier subjects - {{ user.username }}</h2>
+<table id="list">
+  <thead>
+    <tr>
+      <th>Subject Name</th>
+      <th>Details</th>
+      <th>Users</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subject in subjects %}
+    <tr>
+      <td>{{ subject.name }}</td>
+      <td><a href="{% url 'enroll_app:subject_detail' subject.pk %}">Details</a></td>
+      <td><a href="{% url 'enroll_app:professor_subject_enrollment' subject.pk %}">List</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No subjects found.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

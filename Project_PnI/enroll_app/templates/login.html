@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input[type="text"],
+        input[type="password"] {
+            padding: 5px 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+      
+        button {
+            background-color: #04aa46;
+            color: white;
+            padding: 10px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+        }
+      
+        button:hover {
+            opacity: 0.8;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+    </style>
+    <title>Login</title>
+</head>
+<body>
+ 
+    <div>
+        <h2>Login</h2>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <form method="post" action="{% url 'enroll_app:user_login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

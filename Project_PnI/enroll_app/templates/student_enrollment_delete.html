@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Write Off Subject</h2>
+
+<p>Are you sure you want to write off from {{ enrollment.subject.name }}?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Write Off</button>
+  <a href="{% url 'enroll_app:student_enrollment_list' %}">Cancel</a>
+</form>
+{% endblock %}

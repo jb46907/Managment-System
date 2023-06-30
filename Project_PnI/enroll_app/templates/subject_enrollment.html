@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>List of all students- {{ subject.name }}</h2>
+<a href="{% url 'enroll_app:subject_list' %}">Back</a>
+
+
+{% regroup enrollments by student.status as student_status %}
+
+{% for group in student_status %}
+<table id="list">
+  <thead>
+    <tr>
+      <th colspan="5">{{ group.grouper }} Studenti</th>
+    </tr>
+    <tr>
+      <th>Students</th>
+      <th>Student status</th>
+      <th>Subject status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in group.list %}
+    <tr>
+      <td>{{ student.student.username }}</td>
+      <td>{{ student.student.status}}</td>
+      <td>{{ student.status}}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No enrollments found for this subject.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor%}
+
+<h2>Total</h2>
+
+<table id="list">
+  <thead>
+    <tr>
+      <th>Total of passed students</th>
+      <th>Number of REGULAR students</th>
+      <th>Number of EXTRAORDINARY students</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if total_students %}
+    <tr>
+      <td>{{ total_students }}</td>
+      <td>{{ total_regular }}</td>
+      <td>{{ total_extraordinary }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="3">No students passed this subject.</td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+{% endblock %}

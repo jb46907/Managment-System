@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>List of all students</h2>
+
+<table id="list">
+  <thead>
+    <tr>
+      <th>Students</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for student in all_students %}
+    <tr>
+      <td><strong>{{ student.user.username }}:</strong> in total {{ student.passed_ects }} ECTS passed and {{ student.enrolled_ects }} ECTS enrolled <a href="{% url 'enroll_app:list_details' student.user.pk %}">see detail</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="1">No users available.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+
+
+

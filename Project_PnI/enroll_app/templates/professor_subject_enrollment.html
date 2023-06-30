@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Student list for subject - {{ subject.name }}</h2>
+<a href="{% url 'enroll_app:professor_subject_list' %}">Back</a>
+
+<ul>
+    <li><a href="{% url 'enroll_app:professor_subject_enrollment' subject_id=subject.id %}">All</a></li>
+    <li><a href="{% url 'enroll_app:professor_subject_enrollment' subject_id=subject.id %}?status=ENROLLED">Enrolled</a></li>
+    <li><a href="{% url 'enroll_app:professor_subject_enrollment' subject_id=subject.id %}?status=PASSED">Passed</a></li>
+    <li><a href="{% url 'enroll_app:professor_subject_enrollment' subject_id=subject.id %}?status=FAILED">Failed</a></li>
+</ul>
+
+<table id="list">
+  <thead>
+    <tr>
+      <th>Students</th>
+      <th>Status</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for enrollment in enrollments %}
+    <tr>
+      <td>{{ enrollment.student.username }}</td>
+      <td>{{ enrollment.status}}</td>
+      <td><a href="{% url 'enroll_app:professor_subject_enrollment_update' subject.pk enrollment.pk %}">Edit</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No enrollments found for this subject.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

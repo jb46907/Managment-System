@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Detail of {{ student.username }}</h2>
+
+<h3>List of PASSED subjects:</h3>
+{% if enrolled_subjects %}
+<table id="list">
+  <thead>
+    <tr>
+      <th>Subject Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subject in enrolled_subjects %}
+    <tr>
+      <td>{{ subject.name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No enrolled subjects.</p>
+{% endif %}
+
+<h3>List of ENROLLED subjects:</h3>
+{% if passed_subjects %}
+<table id="list">
+  <thead>
+    <tr>
+      <th>Subject Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for subject in passed_subjects %}
+    <tr>
+      <td>{{ subject.name }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No passed subjects.</p>
+{% endif %}
+
+{% endblock %}

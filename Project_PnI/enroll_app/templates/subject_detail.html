@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ subject.name }}</h2>
+  <p><strong>Code:</strong> {{ subject.code }}</p>
+  <p><strong>Program:</strong> {{ subject.program }}</p>
+  <p><strong>Code:</strong> {{ subject.code }}</p>
+  <p><strong>Ects:</strong> {{ subject.ects }}</p>
+  <p><strong>Semester regular:</strong> {{ subject.sem_regular }}</p>
+  <p><strong>Semester extraordinary:</strong> {{ subject.sem_extraordinary }}</p>
+  <p><strong>Elective subject:</strong> {{ subject.elective_subject }}</p>
+  <p><strong>Professor:</strong> {{ subject.professor }}</p>
+  {% if user.is_authenticated %}
+    {% if user.role.name == 'ADMIN' %}
+      <a href="{% url 'enroll_app:subject_list' %}">Back</a>
+    {% elif user.role.name == 'PROFESSOR' %}
+      <a href="{% url 'enroll_app:professor_subject_list' %}">Back</a>
+    {% endif %}
+  {% else %}
+  {% endif %}
+
+{% endblock %}

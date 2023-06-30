@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <br>
+  <a href="{% url 'enroll_app:user_create' %}">Create user</a>
+  <h2>Users List</h2>
+
+  <ul>
+    <li><a href="{% url 'enroll_app:user_list' %}">All Users</a></li>
+    <li><a href="{% url 'enroll_app:admin_list' %}">Admins</a></li>
+    <li><a href="{% url 'enroll_app:professor_list' %}">Professors</a></li>
+    <li><a href="{% url 'enroll_app:student_list' %}">Students</a></li>
+  </ul>
+
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Details</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td><a href="{% url 'enroll_app:user_detail' user.pk %}">Details</a></td>
+          <td><a href="{% url 'enroll_app:user_update' user.pk %}">Edit</a></td>
+          <td><a href="{% url 'enroll_app:user_delete' user.pk %}">Delete</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No users available.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

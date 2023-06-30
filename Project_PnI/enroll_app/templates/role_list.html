@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <br>
+  <a href="{% url 'enroll_app:role_create' %}">Create Role</a>
+  <h2>Role List</h2>
+  {% if messages %}
+  {% for message in messages %}
+    <div class="{% if message.tags %}{{ message.tags }}{% endif %}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for role in roles %}
+      <tr>
+        <td>{{ role.name }}</td>
+        <td><a href="{% url 'enroll_app:role_update' role.pk %}">Edit</a></td>
+        <td><a href="{% url 'enroll_app:role_delete' role.pk %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}

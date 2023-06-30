@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Delete Enrollment</h2>
+<p>Are you sure you want to delete enrollment for {{ enrollment.student.username }} - "{{ enrollment.subject.name }}"?</p>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+  <a href="{% url 'enroll_app:enrollment_list' user.pk %}">Back</a>
+</form>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Student Enrollment List - {{user.username}}</h2>
+<a href="{% url 'enroll_app:student_enrollment_add' %}">Enroll Subject</a>
+
+{% if user.status == "EXTRAORDINARY" %}
+  {% regroup enrollments by subject.sem_extraordinary as subjects_enrolled_sem %}
+  {% regroup subjects_not_enrolled by sem_extraordinary as subjects_not_enrolled_sem %}
+{% elif user.status == "REGULAR" %}
+  {% regroup enrollments by subject.sem_regular as subjects_enrolled_sem %}
+  {% regroup subjects_not_enrolled by sem_regular as subjects_not_enrolled_sem %}
+{% endif %}
+
+{% for group in subjects_enrolled_sem %}
+
+  <table id="list">
+    <thead>
+      <tr>
+        <th colspan="5">{{ group.grouper }} Semester</th>
+      </tr>
+      <tr>
+        <th>Subject</th>
+        <th>Ects</th>
+        <th>Elective</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for subject in group.list %}
+          <tr>
+            <td>{{ subject.subject.name }}</td>
+            <td>{{ subject.subject.ects }}</td>
+            <td>{{ subject.subject.elective_subject }}</td>
+            <td>{{ subject.status }}</td>
+            <td>
+              {% if subject.status != 'FAILED' and subject.status != 'PASSED' %}
+                <a href="{% url 'enroll_app:student_enrollment_delete' subject.pk %}">Write off</a>
+              {% else %}
+                Can't write off
+              {% endif %}
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="5">No subjects found.</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+<h2>Conclusion</h2>
+
+<table id="list">
+  <thead>
+    <tr>
+      <th>Number of subjects enrolled</th>
+      <th>Total ECTS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ total_subjects }}</td>
+      <td>{{ total_ects }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h2>Subjects Not Enrolled</h2>
+
+{% for group in subjects_not_enrolled_sem %}
+  <table id="list">
+    <thead>
+      <tr>
+        <th colspan="6">{{ group.grouper }} Semester</th>
+      </tr>
+      <tr>
+        <th>Subject</th>
+        <th>Ects</th>
+        <th>Elective</th>
+        <th>Semester regular</th>
+        <th>Semester extraordinary</th>
+        <th>Professor</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for subject in group.list %}
+        <tr>
+          <td>{{ subject.name }}</td>
+          <td>{{ subject.ects }}</td>
+          <td>{{ subject.elective_subject }}</td>
+          <td>{{ subject.sem_regular }}</td>
+          <td>{{ subject.sem_extraordinary }}</td>
+          <td>{{ subject.professor }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No subjects found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+
+{% endblock %}

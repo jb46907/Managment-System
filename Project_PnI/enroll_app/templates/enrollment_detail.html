@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Enrollment Detail</h2>
+<p><strong>Student:</strong> {{ enrollment.student.username }}</p>
+<p><strong>Subject:</strong> {{ enrollment.subject.name }}</p>
+<p><strong>Status:</strong> {{ enrollment.status }}</p>
+<a href="{% url 'enroll_app:enrollment_list' user.pk %}">Back</a>
+
+{% endblock %}

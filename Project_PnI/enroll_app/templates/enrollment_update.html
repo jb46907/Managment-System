@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update Enrollment</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Update</button>
+  <a href="{% url 'enroll_app:enrollment_list' user.pk %}">Back</a>
+</form>
+{% endblock %}

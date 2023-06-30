@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Edit User - {{user.username}}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+    <a href="{% url 'enroll_app:user_list' %}">Back</a>
+  </form>
+{% endblock %}
+
+

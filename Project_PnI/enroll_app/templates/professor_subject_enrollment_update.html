@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update status - {{ enrollment.student }}</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button  type="submit" class="button">Update</button>
+  <a href="{% url 'enroll_app:professor_subject_enrollment' subject.pk %}">Back</a>
+</form>
+{% endblock %}

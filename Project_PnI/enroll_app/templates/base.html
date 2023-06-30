@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Management System</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  
+</head>
+<body>
+  <header>
+    
+    <nav>
+      <ul>
+        {% if user.is_authenticated %}
+          {% if is_admin%}
+            <li><a href="{% url 'enroll_app:subject_list' %}">Subjects</a></li>
+            <li><a href="{% url 'enroll_app:list_of_students' %}">List of students</a></li>
+            <li><a href="{% url 'enroll_app:enrollment_user' %}">Enrollments</a></li>
+            <li><a href="{% url 'enroll_app:user_list' %}">Users</a></li>
+            <li><a href="{% url 'enroll_app:role_list' %}">Roles</a></li>
+          {% elif is_professor %}
+            <li><a href="{% url 'enroll_app:professor_subject_list' %}">Subjects</a></li>
+          {% elif is_student %}
+            <li><a href="{% url 'enroll_app:student_enrollment_list' %}">Enrollments</a></li>
+          {% endif %}
+          <li><a href="{% url 'enroll_app:logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'enroll_app:login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+  
+  <footer>
+    
+  </footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<a href="{% url 'enroll_app:enrollment_create' %}">Create enrollment</a>
+<h2>Enrollment Lists</h2>
+<table id="list">
+  <thead>
+    <tr>
+      <th>Students</th>
+      <th>Enrollment list</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.username }}</td>
+      <td><a href="{% url 'enroll_app:enrollment_list' user.id %}">List</a></td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="2">No enrollments found.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
