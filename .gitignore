@@ -1,0 +1,39 @@
+# Python/Django
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+
+# Development files
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+# Secret keys
+secret_key.txt
+secret_key.py
+
+# Media files (generated content)
+media/
+
+# Static files (generated content)
+static/
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Ignore compiled languages
+*.o
+*.out
+
+# Ignore miscellaneous
+*.swp
+.DS_Store
+Thumbs.db
