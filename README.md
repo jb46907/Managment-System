@@ -35,7 +35,7 @@ A small web application that manages students, professors and courses
 
 ## Database Model
 
-![](dbModels.png)
+![](dbModel.png)
 
 ## Tech stack
 
